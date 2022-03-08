@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cuentas', function (Blueprint $table) {
             $table->id();
             $table->string('banco', 50);
-            $table->integer('cbu');
+            $table->string('cbu', 22);
             $table->string('alias', 50);
             $table->timestamps();
         });

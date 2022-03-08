@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('beneficiarios', function (Blueprint $table) {
-            $table->foreignId('dni', 8);
+            $table->id();
+            $table->string('dni', 8);
             $table->string('name', 50);
             $table->string('apellido', 50);
-            $table->integer('cuil', 11);
+            $table->string('cuil', 11);
             $table->timestamps();
         });
     }
