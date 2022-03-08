@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
-            $table->string('dni', 8);
+            $table->integer('dni')->unique();
             $table->string('name', 50);
             $table->string('apellido', 50);
             $table->string('cuil', 11);
