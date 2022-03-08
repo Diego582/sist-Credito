@@ -25,9 +25,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('expedientes')
                 ->onDelete('cascade');
-            $table->foreign('beneficiario_id')
-                ->references('id')
-                ->on('beneficiarios');
             $table->timestamps();
         });
     }
