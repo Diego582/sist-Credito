@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cuenta extends Model
 {
     use HasFactory;
+
+    public function beneficiarios()
+    {
+        return $this->belongsToMany(Beneficiario::class);
+    }
 }

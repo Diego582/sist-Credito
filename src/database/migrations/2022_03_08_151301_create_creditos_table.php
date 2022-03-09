@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('detalle');
             $table->date('fecha_entrega');
             $table->unsignedBigInteger('expediente_id');
-            $table->unsignedBigInteger('beneficiario_id');
+
             $table->foreign('expediente_id')
                 ->references('id')
                 ->on('expedientes')

@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('creditos_cuotas', function (Blueprint $table) {
-            $table->unsignedBigInteger('creditos_id');
-            $table->unsignedBigInteger('cuotas_id');
-            $table->foreign('creditos_id')->references('id')->on('creditos')->onDelete('cascade');
-            $table->foreign('cuotas_id')->references('id')->on('cuotas')->onDelete('cascade');
+        Schema::create('credito_cuota', function (Blueprint $table) {
+            $table->unsignedBigInteger('credito_id');
+            $table->unsignedBigInteger('cuota_id');
+            $table->foreign('credito_id')->references('id')->on('creditos')->onDelete('cascade');
+            $table->foreign('cuota_id')->references('id')->on('cuotas')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('creditos_cuotas');
+        Schema::dropIfExists('credito_cuota');
     }
 };
