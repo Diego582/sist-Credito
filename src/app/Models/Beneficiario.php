@@ -15,4 +15,14 @@ class Beneficiario extends Model
     {
         return $this->belongsToMany(Cuenta::class);
     }
+
+    public function creditos()
+    {
+        return $this->belongsToMany(Credito::class);
+    }
+
+    public function tipos()
+    {
+        return $this->belongsToMany(Tipo::class);
+    }
 }
