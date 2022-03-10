@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipos', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create('pagoables', function (Blueprint $table) {
+            
+            $table->morphs('pagoable');
+            
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos');
+        Schema::dropIfExists('pagoables');
     }
 };
