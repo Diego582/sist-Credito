@@ -1,17 +1,25 @@
 <template>
-    <app-layout title="Dashboard">
+    <app-layout title="users">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Users
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="">
+            <div class="">
+                <div class="container">
                     <div v-for="user in users" :key="user.id">
-                    {{user.name}}
+                        {{ user.name }}
                     </div>
+                </div>
+                <div class="container grid grid-cols1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-blue-200 col-span-2">A</div>
+                    <div class="bg-blue-300">B</div>
+                    <div class="bg-blue-400">C</div>
+                    <div class="bg-blue-500">D</div>
+                    <div class="bg-blue-600">E</div>
+                    <div class="bg-blue-700">F</div>
                 </div>
             </div>
         </div>
@@ -29,3 +37,4 @@ export default defineComponent({
     },
 });
 </script>
+<style></style>
