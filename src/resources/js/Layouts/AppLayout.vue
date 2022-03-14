@@ -36,6 +36,14 @@
                                 >
                                     Users
                                 </jet-nav-link>
+                                <jet-nav-link
+                                    :href="route('expedientes.index')"
+                                    :active="
+                                        route().current('expedientes.index')
+                                    "
+                                >
+                                    Expedientes
+                                </jet-nav-link>
                             </div>
                         </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExpedienteController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/users', function () {
     return Inertia::render('Users/Index', [
-        'users' => User::all()]);
+        'users' => User::all()
+    ]);
 })->name('users.index');
+
+Route::resource('/dashboard/expedientes', ExpedienteController::class)
+    ->middleware(['auth:sanctum', 'verified']);
