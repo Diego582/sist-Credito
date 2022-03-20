@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Expediente extends Model
 {
     use HasFactory;
+    protected $fillable = ['numero', 'letra', 'anio', 'objeto', 'extracto', 'status'];
+
 
     //relacion uno a muchos inversa
     public function user()

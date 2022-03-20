@@ -3,9 +3,9 @@
 }
 
 .table th {
-    @apply text-white bg-blue-700;
+    @apply text-white bg-blue-500;
 }
 
 .table tbody tr:nth-child(2n + 1) {
-    @apply bg-blue-400;
+    @apply bg-blue-200;
 }

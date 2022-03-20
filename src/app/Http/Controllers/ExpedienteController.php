@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expediente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class ExpedienteController extends Controller
@@ -17,8 +18,26 @@ class ExpedienteController extends Controller
     public function index()
     {
         $expedientes = Expediente::all();
-        return Inertia::render('List', ['expedientes' => $expedientes]);
+        return Inertia::render('Expedientes/Mostrar', ['expedientes' => $expedientes]);
+
+        /* return Inertia::render('Expedientes/Mostrar', [
+            'expedientes' => Expediente::all()->map(function ($expediente) {
+                return [
+                    'id' => $expediente->id,
+                    'numero' => $expediente->numero,
+                    'letra' => $expediente->letra,
+                    'anio' => $expediente->anio,
+                    'objeto' => $expediente->objeto,
+                    'extracto' => $expediente->extracto,
+                    'status' => $expediente->status,
+                    'edit_url' => URL::route('expedientes.edit', $expediente),
+                ];
+            }),
+            'create_url' => URL::route('expedientes.create'),
+        ]); */
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +46,7 @@ class ExpedienteController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Form');
+        return Inertia::render('Expedientes/FormCrear');
     }
 
     /**
@@ -47,7 +66,7 @@ class ExpedienteController extends Controller
             ]
         );
         Expediente::create($request->all());
-        return  Redirect::route('expediente.index');
+        return  Redirect::route('expedientes.index');
     }
 
     /**
@@ -69,7 +88,7 @@ class ExpedienteController extends Controller
      */
     public function edit(Expediente $expediente)
     {
-        return Inertia::render('EditForm', ['expediente' => $expediente]);
+        return Inertia::render('Expedientes/EditForm', ['expediente' => $expediente]);
     }
 
     /**

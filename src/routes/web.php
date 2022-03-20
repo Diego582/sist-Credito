@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeneficiarioController;
 use App\Http\Controllers\ExpedienteController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -36,5 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/users', functio
     ]);
 })->name('users.index');
 
-Route::resource('/dashboard/expedientes', ExpedienteController::class)
+Route::resource('expedientes', ExpedienteController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::resource('beneficiarios', BeneficiarioController::class)
     ->middleware(['auth:sanctum', 'verified']);

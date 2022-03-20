@@ -24,25 +24,20 @@
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <jet-nav-link
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </jet-nav-link>
-
-                                <jet-nav-link
-                                    :href="route('users.index')"
-                                    :active="route().current('users.index')"
-                                >
-                                    Users
-                                </jet-nav-link>
-                                <jet-nav-link
                                     :href="route('expedientes.index')"
                                     :active="
                                         route().current('expedientes.index')
                                     "
                                 >
                                     Expedientes
+                                </jet-nav-link>
+                                 <jet-nav-link
+                                    :href="route('beneficiarios.index')"
+                                    :active="
+                                        route().current('beneficiarios.index')
+                                    "
+                                >
+                                    Beneficiarios
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -323,10 +318,16 @@
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('expedientes.index')"
+                            :active="route().current('expedientes.index')"
                         >
-                            Dashboard
+                            Expediente
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link
+                            :href="route('beneficiarios.index')"
+                            :active="route().current('beneficiarios.index')"
+                        >
+                            Expediente
                         </jet-responsive-nav-link>
                     </div>
 

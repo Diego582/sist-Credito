@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Beneficiario extends Model
 {
     use HasFactory;
+    protected $fillable = ['dni','name','apellido','cuil'];
+
 
     //relacion muchos a muchos 
 
