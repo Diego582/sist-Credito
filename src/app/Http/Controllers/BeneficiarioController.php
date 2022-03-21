@@ -6,6 +6,7 @@ use App\Models\Beneficiario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use PhpParser\Node\Stmt\Return_;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class BeneficiarioController extends Controller
@@ -68,7 +69,7 @@ class BeneficiarioController extends Controller
      */
     public function edit(Beneficiario $beneficiario)
     {
-        //
+        return Inertia::render('Beneficiarios/EditForm', ['beneficiario' => $beneficiario]);
     }
 
     /**
@@ -80,7 +81,8 @@ class BeneficiarioController extends Controller
      */
     public function update(Request $request, Beneficiario $beneficiario)
     {
-        //
+        $beneficiario->update($request->all());
+        return Redirect::route('beneficiarios.index');
     }
 
     /**
