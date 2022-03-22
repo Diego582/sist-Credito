@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cuenta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CuentaController extends Controller
@@ -26,7 +27,7 @@ class CuentaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Cuentas/FromCrear');
+        return Inertia::render('Cuentas/FormCrear');
     }
 
     /**
@@ -37,7 +38,13 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'banco' => 'required',
+            'cbu' => 'required',
+            'alias' => 'required'
+        ]);
+        Cuenta::create($request->all());
+        return Redirect::route('cuentas.index');
     }
 
     /**
@@ -59,7 +66,7 @@ class CuentaController extends Controller
      */
     public function edit(Cuenta $cuenta)
     {
-        //
+        return Inertia::render('Cuentas/EditForm', ['cuenta' => $cuenta]);
     }
 
     /**
@@ -71,7 +78,8 @@ class CuentaController extends Controller
      */
     public function update(Request $request, Cuenta $cuenta)
     {
-        //
+        $cuenta->update($request->all());
+        return Redirect::route('cuentas.index');
     }
 
     /**
@@ -82,6 +90,7 @@ class CuentaController extends Controller
      */
     public function destroy(Cuenta $cuenta)
     {
-        //
+        $cuenta->delete();
+        return Redirect::route('cuentas.index');
     }
 }

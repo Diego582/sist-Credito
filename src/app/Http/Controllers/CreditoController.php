@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Credito;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class CreditoController extends Controller
 {
@@ -14,7 +16,8 @@ class CreditoController extends Controller
      */
     public function index()
     {
-        //
+        $creditos = Credito::all();
+        return Inertia::render('Creditos/Mostrar', ['creditos' => $creditos]);
     }
 
     /**
@@ -24,7 +27,7 @@ class CreditoController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Creditos/FormCreate');
     }
 
     /**
@@ -35,7 +38,17 @@ class CreditoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'linea' => 'required',
+                'monto' => 'required',
+                'detalle' => 'required',
+                'fecha_entrega' => 'required'
+
+            ]
+        );
+        Credito::create($request->all());
+        return Redirect::route('creditos.index');
     }
 
     /**
@@ -57,7 +70,7 @@ class CreditoController extends Controller
      */
     public function edit(Credito $credito)
     {
-        //
+        return Inertia::render('Creditos/FormEdit', ['credito' => $credito]);
     }
 
     /**
@@ -69,7 +82,8 @@ class CreditoController extends Controller
      */
     public function update(Request $request, Credito $credito)
     {
-        //
+        $credito->update($request->all());
+        return Redirect::route('creditos.index');
     }
 
     /**
@@ -80,6 +94,7 @@ class CreditoController extends Controller
      */
     public function destroy(Credito $credito)
     {
-        //
+        $credito->delete();
+        return Redirect::route('creditos.index');
     }
 }
