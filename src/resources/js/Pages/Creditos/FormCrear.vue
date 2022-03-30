@@ -91,6 +91,70 @@
                 </div>
             </div>
         </div>
+         <div class="container">
+      <table
+        class="table w-full border-separate lg:border-collapse table-fixed"
+      >
+        <thead>
+          <tr>
+            <th class="w-1/5">Nº Cuota</th>
+            <th class="w-1/5">Capital</th>
+            <th class="w-1/5">Interes</th>
+            <th class="w-1/5">Saldo Capital</th>
+            <th class="w-1/5">Vencimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="credito in creditos" :key="credito.id">
+            <td>
+              {{ credito.banco }}
+            </td>
+            <td>
+              {{ credito.cbu }}
+            </td>
+            <td>
+              {{ credito.alias }}
+            </td>
+            <td>
+              <button>
+                <Link
+                  :href="route('creditos.edit', credito.id)"
+                  class="
+                    h-10
+                    px-6
+                    font-semibold
+                    rounded-md
+                    bg-blue-700
+                    hover:bg-green-600
+                    text-white
+                  "
+                >
+                  Editar
+                </Link>
+              </button>
+              <button>
+                <Link
+                  method="delete"
+                  :href="route('creditos.destroy', credito.id)"
+                  class="
+                    h-10
+                    px-6
+                    font-semibold
+                    rounded-md
+                    bg-blue-700
+                    hover:bg-red-700
+                    text-white
+                  "
+                  v-on:click.prevent="deleteRegistro()"
+                >
+                  Eliminar
+                </Link>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     </app-layout>
 </template>
 
