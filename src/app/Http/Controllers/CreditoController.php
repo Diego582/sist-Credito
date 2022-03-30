@@ -27,7 +27,7 @@ class CreditoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Creditos/FormCreate');
+        return Inertia::render('Creditos/FormCrear');
     }
 
     /**
