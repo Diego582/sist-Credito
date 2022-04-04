@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="cuentas">
+    <app-layout title="creditos">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Cargar Credito
@@ -18,13 +18,17 @@
                                     class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
                                     >Linea</label
                                 >
-                                <input
+                                <select
                                     id="linea"
                                     v-model="form.linea"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    type="text"
-                                    placeholder="Linea"
-                                />
+                                >
+                                    <option>Linea 1</option>
+                                    <option>Linea 2</option>
+                                    <option>Linea 3</option>
+                                    <option>Linea Pasturas</option>
+                                    <option>Linea Maiz</option>
+                                </select>
                             </div>
 
                             <div class="grid grid-cols-1">
@@ -66,6 +70,21 @@
                                     placeholder="Fecha de Entrega"
                                 />
                             </div>
+                            <div class="grid grid-cols-1">
+                                <label
+                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                    >Expediente</label
+                                >
+                                <select
+                                    id="expediente_id"
+                                    v-model="form.expediente_id"
+                                    class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                >
+                                    <option  v-for="expediente in expedientes" :key="expediente.id" :value="expediente.id">
+                                        {{ expediente.numero }}-{{ expediente.letra }}-{{ expediente.anio }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
 
                         <div
@@ -73,7 +92,7 @@
                         >
                             <button>
                                 <Link
-                                    :href="route('beneficiarios.index')"
+                                    :href="route('creditos.index')"
                                     class="w-auto bg-gray-500 hover:bg-red-400 rounded-lg shadow-xl font-medium text-white px-4 py-2"
                                     type="button"
                                 >
@@ -91,70 +110,56 @@
                 </div>
             </div>
         </div>
-         <div class="container">
-      <table
-        class="table w-full border-separate lg:border-collapse table-fixed"
-      >
-        <thead>
-          <tr>
-            <th class="w-1/5">Nº Cuota</th>
-            <th class="w-1/5">Capital</th>
-            <th class="w-1/5">Interes</th>
-            <th class="w-1/5">Saldo Capital</th>
-            <th class="w-1/5">Vencimiento</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="credito in creditos" :key="credito.id">
-            <td>
-              {{ credito.banco }}
-            </td>
-            <td>
-              {{ credito.cbu }}
-            </td>
-            <td>
-              {{ credito.alias }}
-            </td>
-            <td>
-              <button>
-                <Link
-                  :href="route('creditos.edit', credito.id)"
-                  class="
-                    h-10
-                    px-6
-                    font-semibold
-                    rounded-md
-                    bg-blue-700
-                    hover:bg-green-600
-                    text-white
-                  "
-                >
-                  Editar
-                </Link>
-              </button>
-              <button>
-                <Link
-                  method="delete"
-                  :href="route('creditos.destroy', credito.id)"
-                  class="
-                    h-10
-                    px-6
-                    font-semibold
-                    rounded-md
-                    bg-blue-700
-                    hover:bg-red-700
-                    text-white
-                  "
-                  v-on:click.prevent="deleteRegistro()"
-                >
-                  Eliminar
-                </Link>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <div class="container">
+            <table
+                class="table w-full border-separate lg:border-collapse table-fixed"
+            >
+                <thead>
+                    <tr>
+                        <th class="w-1/5">Nº Cuota</th>
+                        <th class="w-1/5">Capital</th>
+                        <th class="w-1/5">Interes</th>
+                        <th class="w-1/5">Saldo Capital</th>
+                        <th class="w-1/5">Vencimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="credito in creditos" :key="credito.id">
+                        <td>
+                            {{ credito.banco }}
+                        </td>
+                        <td>
+                            {{ credito.cbu }}
+                        </td>
+                        <td>
+                            {{ credito.alias }}
+                        </td>
+                        <td>
+                            <button>
+                                <Link
+                                    :href="route('creditos.edit', credito.id)"
+                                    class="h-10 px-6 font-semibold rounded-md bg-blue-700 hover:bg-green-600 text-white"
+                                >
+                                    Editar
+                                </Link>
+                            </button>
+                            <button>
+                                <Link
+                                    method="delete"
+                                    :href="
+                                        route('creditos.destroy', credito.id)
+                                    "
+                                    class="h-10 px-6 font-semibold rounded-md bg-blue-700 hover:bg-red-700 text-white"
+                                    v-on:click.prevent="deleteRegistro()"
+                                >
+                                    Eliminar
+                                </Link>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </app-layout>
 </template>
 
@@ -164,7 +169,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
-    props: { errors: Object },
+    props: ["expedientes"],
     components: { AppLayout, Head, Link },
     data() {
         return {
@@ -173,12 +178,14 @@ export default defineComponent({
                 monto: null,
                 detalle: null,
                 fecha_entrega: null,
+                expediente_id: null,
+                expedientes:this.$props.expedientes,
             },
         };
     },
     methods: {
         submit() {
-            this.$inertia.post(route("cuentas.store"), this.form);
+            this.$inertia.post(route("creditos.store"), this.form);
         },
     },
 });

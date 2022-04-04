@@ -9,6 +9,10 @@ class Credito extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['linea','monto','detalle','fecha_entrega','expediente_id'];
+
+
+
     //relacion uno a muchos inversa
 
     public function expediente()

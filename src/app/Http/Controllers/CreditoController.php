@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Credito;
+use App\Models\Expediente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -27,7 +28,8 @@ class CreditoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Creditos/FormCrear');
+        $expedientes = Expediente::all();
+        return Inertia::render('Creditos/FormCrear', ['expedientes' => $expedientes]);
     }
 
     /**
