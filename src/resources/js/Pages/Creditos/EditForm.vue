@@ -2,7 +2,7 @@
   <app-layout title="cuentas">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Editar Cuentas
+        Editar Creditos
       </h2>
     </template>
     <div class="py-12">
@@ -20,11 +20,11 @@
                     text-xs text-gray-500 text-light
                     font-semibold
                   "
-                  >Banco</label
+                  >Linea</label
                 >
                 <input
-                  id="dni"
-                  v-model="form.banco"
+                  id="linea"
+                  v-model="form.linea"
                   class="
                     py-2
                     px-3
@@ -37,7 +37,7 @@
                     focus:border-transparent
                   "
                   type="text"
-                  placeholder="Banco"
+                  placeholder="Linea"
                 />
               </div>
 
@@ -49,11 +49,11 @@
                     text-xs text-gray-500 text-light
                     font-semibold
                   "
-                  >Cbu</label
+                  >Monto</label
                 >
                 <input
-                  id="cbu"
-                  v-model="form.cbu"
+                  id="monto"
+                  v-model="form.monto"
                   class="
                     py-2
                     px-3
@@ -66,7 +66,7 @@
                     focus:border-transparent
                   "
                   type="text"
-                  placeholder="CBU"
+                  placeholder="monto"
                 />
               </div>
               <div class="grid grid-cols-1">
@@ -77,11 +77,11 @@
                     text-xs text-gray-500 text-light
                     font-semibold
                   "
-                  >Alias</label
+                  >detalle</label
                 >
                 <input
-                  id="alias"
-                  v-model="form.alias"
+                  id="detalle"
+                  v-model="form.detalle"
                   class="
                     py-2
                     px-3
@@ -94,8 +94,72 @@
                     focus:border-transparent
                   "
                   type="text"
-                  placeholder="Alias"
+                  placeholder="detalle"
                 />
+              </div>
+              <div class="grid grid-cols-1">
+                <label
+                  class="
+                    uppercase
+                    md:text-sm
+                    text-xs text-gray-500 text-light
+                    font-semibold
+                  "
+                  >Fecha de Entrega</label
+                >
+                <input
+                  id="fecha_entrega"
+                  v-model="form.fecha_entrega"
+                  class="
+                    py-2
+                    px-3
+                    rounded-lg
+                    border-2 border-blue-300
+                    mt-1
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-blue-600
+                    focus:border-transparent
+                  "
+                  type="text"
+                  placeholder="Fecha de Entrega"
+                />
+              </div>
+              <div class="grid grid-cols-1">
+                <label
+                  class="
+                    uppercase
+                    md:text-sm
+                    text-xs text-gray-500 text-light
+                    font-semibold
+                  "
+                  >Expediente</label
+                >
+                <select
+                  id="expediente_id"
+                  v-model="form.expediente_id"
+                  class="
+                    py-2
+                    px-3
+                    rounded-lg
+                    border-2 border-blue-300
+                    mt-1
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-blue-600
+                    focus:border-transparent
+                  "
+                >
+                  <option
+                    v-for="expediente in expedientes"
+                    :key="expediente.id"
+                    :value="expediente.id"
+                  >
+                    {{ expediente.numero }}-{{ expediente.letra }}-{{
+                      expediente.anio
+                    }}
+                  </option>
+                </select>
               </div>
             </div>
 
@@ -104,7 +168,7 @@
             >
               <button>
                 <Link
-                  :href="route('beneficiarios.index')"
+                  :href="route('creditos.index')"
                   class="
                     w-auto
                     bg-gray-500
@@ -151,7 +215,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
-  props: ["cuenta"],
+  props: ["credito"],
   components: {
     AppLayout,
     Head,
@@ -160,9 +224,11 @@ export default defineComponent({
   data() {
     return {
       form: {
-        banco: this.$props.cuenta.banco,
-        cbu: this.$props.cuenta.cbu,
-        alias: this.$props.cuenta.alias,
+        linea: this.$props.credito.linea,
+        monto: this.$props.credito.monto,
+        detalle: this.$props.credito.detalle,
+        fecha_entrega: this.$props.credito.fecha_entrega,
+        expediente_id: this.$props.credito.expediente_id,
       },
     };
   },
@@ -172,7 +238,7 @@ export default defineComponent({
     },
     submit() {
       this.$inertia.put(
-        route("cuentas.update", this.$props.cuenta.id),
+        route("creditos.update", this.$props.credito.id),
         this.form
       );
     },

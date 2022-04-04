@@ -72,7 +72,7 @@ class CreditoController extends Controller
      */
     public function edit(Credito $credito)
     {
-        return Inertia::render('Creditos/FormEdit', ['credito' => $credito]);
+        return Inertia::render('Creditos/EditForm', ['credito' => $credito]);
     }
 
     /**
