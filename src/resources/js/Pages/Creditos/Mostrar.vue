@@ -23,6 +23,7 @@
                         <th class="w-1/5">Monto</th>
                         <th class="w-1/5">Detalle</th>
                         <th class="w-2/5">Fecha de Entrega</th>
+                        <th class="w-2/5">Expediente</th>
                         <th class="w-2/5">Acciones</th>
                     </tr>
                 </thead>
@@ -39,6 +40,9 @@
                         </td>
                         <td>
                             {{ credito.fecha_entrega }}
+                        </td>
+                         <td >
+                            {{ credito.expediente_id }}
                         </td>
                         <td>
                             <button>
@@ -75,7 +79,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
-    props: ["creditos"],
+    props: ["creditos","expedientes"],
     components: {
         AppLayout,
         Head,

@@ -126,41 +126,20 @@
                 />
               </div>
               <div class="grid grid-cols-1">
-                <label
-                  class="
-                    uppercase
-                    md:text-sm
-                    text-xs text-gray-500 text-light
-                    font-semibold
-                  "
-                  >Expediente</label
-                >
-                <select
-                  id="expediente_id"
-                  v-model="form.expediente_id"
-                  class="
-                    py-2
-                    px-3
-                    rounded-lg
-                    border-2 border-blue-300
-                    mt-1
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-blue-600
-                    focus:border-transparent
-                  "
-                >
-                  <option
-                    v-for="expediente in expedientes"
-                    :key="expediente.id"
-                    :value="expediente.id"
-                  >
-                    {{ expediente.numero }}-{{ expediente.letra }}-{{
-                      expediente.anio
-                    }}
-                  </option>
-                </select>
-              </div>
+                                <label
+                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                    >Expediente</label
+                                >
+                                <select
+                                    id="expediente_id"
+                                    v-model="form.expediente_id"
+                                    class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                >
+                                    <option  v-for="expediente in expedientes" :key="expediente.id" :value="expediente.id">
+                                        {{ expediente.numero }}-{{ expediente.letra }}-{{ expediente.anio }}
+                                    </option>
+                                </select>
+                            </div>
             </div>
 
             <div
@@ -215,7 +194,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
-  props: ["credito"],
+  props: ["credito", "expedientes"],
   components: {
     AppLayout,
     Head,
@@ -229,6 +208,7 @@ export default defineComponent({
         detalle: this.$props.credito.detalle,
         fecha_entrega: this.$props.credito.fecha_entrega,
         expediente_id: this.$props.credito.expediente_id,
+        expedientes: this.$props.expedientes,
       },
     };
   },

@@ -17,8 +17,9 @@ class CreditoController extends Controller
      */
     public function index()
     {
+        $expedientes = Expediente::all();
         $creditos = Credito::all();
-        return Inertia::render('Creditos/Mostrar', ['creditos' => $creditos]);
+        return Inertia::render('Creditos/Mostrar', ['creditos' => $creditos, 'expedientes' => $expedientes]);
     }
 
     /**
@@ -72,7 +73,8 @@ class CreditoController extends Controller
      */
     public function edit(Credito $credito)
     {
-        return Inertia::render('Creditos/EditForm', ['credito' => $credito]);
+        $expedientes = Expediente::all();
+        return Inertia::render('Creditos/EditForm', ['credito' => $credito, 'expedientes' => $expedientes]);
     }
 
     /**
